@@ -1,0 +1,69 @@
+@import 'src/global/app.less';
+
+.inlineBlock {
+  display: inline-block;
+}
+.block { 
+  display: block;
+  width: 100%;
+}
+.default, .dashed, .primary, .text, .link {
+  padding: @padding3 @padding2;
+  border: @border-width3 solid;
+  border-radius: @border-radius3;
+  color: @color-gray1;
+  background: @color-white1;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-size: 1em;
+  &:hover, &.loading {
+    color: @color-gray2;
+    background-color: @color-white2;
+  }
+}
+.dashed {
+  border-style: dashed;
+}
+.text, .link {
+  border: none;
+}
+.link {
+  color: @color-blue1;
+  &:hover, &.loading {
+    color: @color-blue2;
+  }
+}
+.primary {
+  background: @color-blue1;
+  border-color: @color-blue1;
+  color: @color-white1;
+  &:hover, &.loading {
+    color: @color-white2;
+    background-color: @color-blue2;
+  }
+}
+
+.disabled {
+  background: @color-white2;
+  color: @color-gray1;
+  border-color: @color-gray1;
+  cursor: not-allowed;
+}
+
+.loading {
+  cursor: unset;
+  svg {
+    margin-right: 5px;
+    animation: roll 1s ease-out infinite;
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes roll {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: ratate(360deg);
+  }
+}

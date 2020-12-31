@@ -1,0 +1,27 @@
+@import 'src/global/app.less';
+
+.modal {
+  padding: @padding2;
+  display: block;
+  box-shadow: @box-shadow-black;
+  &.hide {
+    display: none;
+  }
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .title {
+    flex: 1 1 1fr;
+  }
+  .close {
+    flex: 0 0 1em;
+  }
+}
+.footer {
+  text-align: right;
+  .marginLeft {
+    margin-left: @margin3;
+  }
+}
