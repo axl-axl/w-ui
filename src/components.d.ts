@@ -7,14 +7,19 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface MyButton {
-        "block": boolean;
-        "disabled": boolean;
-        "linkUrl": string;
-        "loading": boolean;
-        "onClick": Function;
-        "target": string;
+        "block"?: boolean;
+        "disabled"?: boolean;
+        "linkUrl"?: string;
+        "loading"?: boolean;
+        "onClick"?: Function;
+        "target"?: string;
         "text": string;
-        "type": 'default' | 'primary' | 'link' | 'text' | 'dashed';
+        "type"?: 'default' | 'primary' | 'link' | 'text' | 'dashed';
+    }
+    interface MyCheckBox {
+        "onChange": (v) => void;
+        "text": string;
+        "value": boolean;
     }
     interface MyComponent {
         /**
@@ -30,6 +35,12 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface MyDatePick {
+        "format": string;
+        "onChange"?: (v: Date[] | Date) => void;
+        "picker": 'day' | 'month';
+        "value"?: string;
+    }
     interface MyIcon {
         "class": string;
         "color": string;
@@ -37,8 +48,7 @@ export namespace Components {
         "size": string;
     }
     interface MyInput {
-        "defaultValue": string | number;
-        "hasBorder": boolean;
+        "editAble": boolean;
         "placeholder": string;
         "type": 'text' | 'textarea' | 'color' | 'checkbox' | 'date' | 'file';
         "value": string | number;
@@ -49,13 +59,17 @@ export namespace Components {
         "headerTitle"?: string;
         "headerclass"?: string;
         "onCancel"?: Function;
-        "onOk"?: (v:Object) => void;
+        "onOk"?: (v: Object) => void;
         "visible": boolean;
     }
     interface MyPopover {
         "position"?: 't' | 'b' | 'l' | 'r' | 'tl' | 'tr' | 'bl' | 'br';
         "target"?: 'hover' | 'click';
         "visible"?: boolean;
+    }
+    interface MyRangePick {
+        "onChange": (value: Date[]) => void;
+        "value": string[];
     }
 }
 declare global {
@@ -65,11 +79,23 @@ declare global {
         prototype: HTMLMyButtonElement;
         new (): HTMLMyButtonElement;
     };
+    interface HTMLMyCheckBoxElement extends Components.MyCheckBox, HTMLStencilElement {
+    }
+    var HTMLMyCheckBoxElement: {
+        prototype: HTMLMyCheckBoxElement;
+        new (): HTMLMyCheckBoxElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
+    };
+    interface HTMLMyDatePickElement extends Components.MyDatePick, HTMLStencilElement {
+    }
+    var HTMLMyDatePickElement: {
+        prototype: HTMLMyDatePickElement;
+        new (): HTMLMyDatePickElement;
     };
     interface HTMLMyIconElement extends Components.MyIcon, HTMLStencilElement {
     }
@@ -95,13 +121,22 @@ declare global {
         prototype: HTMLMyPopoverElement;
         new (): HTMLMyPopoverElement;
     };
+    interface HTMLMyRangePickElement extends Components.MyRangePick, HTMLStencilElement {
+    }
+    var HTMLMyRangePickElement: {
+        prototype: HTMLMyRangePickElement;
+        new (): HTMLMyRangePickElement;
+    };
     interface HTMLElementTagNameMap {
         "my-button": HTMLMyButtonElement;
+        "my-check-box": HTMLMyCheckBoxElement;
         "my-component": HTMLMyComponentElement;
+        "my-date-pick": HTMLMyDatePickElement;
         "my-icon": HTMLMyIconElement;
         "my-input": HTMLMyInputElement;
         "my-modal": HTMLMyModalElement;
         "my-popover": HTMLMyPopoverElement;
+        "my-range-pick": HTMLMyRangePickElement;
     }
 }
 declare namespace LocalJSX {
@@ -114,6 +149,11 @@ declare namespace LocalJSX {
         "target"?: string;
         "text"?: string;
         "type"?: 'default' | 'primary' | 'link' | 'text' | 'dashed';
+    }
+    interface MyCheckBox {
+        "onChange"?: (v) => void;
+        "text"?: string;
+        "value"?: boolean;
     }
     interface MyComponent {
         /**
@@ -129,6 +169,12 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface MyDatePick {
+        "format"?: string;
+        "onChange"?: (v: Date[] | Date) => void;
+        "picker"?: 'day' | 'month';
+        "value"?: string;
+    }
     interface MyIcon {
         "class"?: string;
         "color"?: string;
@@ -136,8 +182,7 @@ declare namespace LocalJSX {
         "size"?: string;
     }
     interface MyInput {
-        "defaultValue"?: string | number;
-        "hasBorder"?: boolean;
+        "editAble"?: boolean;
         "placeholder"?: string;
         "type"?: 'text' | 'textarea' | 'color' | 'checkbox' | 'date' | 'file';
         "value"?: string | number;
@@ -148,7 +193,7 @@ declare namespace LocalJSX {
         "headerTitle"?: string;
         "headerclass"?: string;
         "onCancel"?: Function;
-        "onOk"?: (v:Object) => void;
+        "onOk"?: (v: Object) => void;
         "visible"?: boolean;
     }
     interface MyPopover {
@@ -156,13 +201,20 @@ declare namespace LocalJSX {
         "target"?: 'hover' | 'click';
         "visible"?: boolean;
     }
+    interface MyRangePick {
+        "onChange"?: (value: Date[]) => void;
+        "value"?: string[];
+    }
     interface IntrinsicElements {
         "my-button": MyButton;
+        "my-check-box": MyCheckBox;
         "my-component": MyComponent;
+        "my-date-pick": MyDatePick;
         "my-icon": MyIcon;
         "my-input": MyInput;
         "my-modal": MyModal;
         "my-popover": MyPopover;
+        "my-range-pick": MyRangePick;
     }
 }
 export { LocalJSX as JSX };
@@ -170,11 +222,14 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "my-button": LocalJSX.MyButton & JSXBase.HTMLAttributes<HTMLMyButtonElement>;
+            "my-check-box": LocalJSX.MyCheckBox & JSXBase.HTMLAttributes<HTMLMyCheckBoxElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-date-pick": LocalJSX.MyDatePick & JSXBase.HTMLAttributes<HTMLMyDatePickElement>;
             "my-icon": LocalJSX.MyIcon & JSXBase.HTMLAttributes<HTMLMyIconElement>;
             "my-input": LocalJSX.MyInput & JSXBase.HTMLAttributes<HTMLMyInputElement>;
             "my-modal": LocalJSX.MyModal & JSXBase.HTMLAttributes<HTMLMyModalElement>;
             "my-popover": LocalJSX.MyPopover & JSXBase.HTMLAttributes<HTMLMyPopoverElement>;
+            "my-range-pick": LocalJSX.MyRangePick & JSXBase.HTMLAttributes<HTMLMyRangePickElement>;
         }
     }
 }

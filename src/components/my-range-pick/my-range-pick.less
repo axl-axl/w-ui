@@ -1,0 +1,71 @@
+@import 'src/global/app.less';
+
+:host {
+  display: inline-block;
+}
+.calendar {
+  width: 800px;
+  background: @color-white1;
+  border-radius: @border-radius3;
+  box-shadow: 0 0 10px 0 @color-black4;
+  .calendarHead {
+    padding: 10px;
+    border-bottom: 1px solid @color-black4;
+    display: flex;
+    justify-content: space-between;
+    .controlBtn {
+      .iconPath {
+        cursor: pointer;
+        fill: none;
+        stroke: @color-black4;
+        stroke-width: 50px;
+        width: 1em;
+      }
+    }
+    .yearMonth {
+      span {
+        cursor: pointer;
+        padding: 0 5px;
+      }
+    }
+  }
+  .calendarRange {
+    display: flex;
+    .calendarBody {
+      padding: 10px;
+      display: grid;
+      grid-gap: 5px;
+      box-sizing: border-box;
+      flex: 0 0 50%;
+      &.calendarDay {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+      }
+      &.calendarMonth {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+      }
+      .item {
+        text-align: center;
+        cursor: pointer;
+        border-radius: @border-radius3;
+        &:hover, &.currentDay {
+          background: @color-blue2;
+          color: @color-white1;
+        }
+        &.otherMonth {
+          background: @color-white1;
+          color: @color-black4;
+        }
+      }
+    }
+  }
+  .calendarFooter {
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid @color-black4;
+    .today {
+      cursor: pointer;
+    }
+  }
+}

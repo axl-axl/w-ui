@@ -9,16 +9,20 @@
 }
 .default, .dashed, .primary, .text, .link {
   padding: @padding3 @padding2;
-  border: @border-width3 solid;
+  border: @border-width3 solid @color-white1;
   border-radius: @border-radius3;
-  color: @color-gray1;
-  background: @color-white1;
+  color: @color-black1;
+  background: @color-white5;
   cursor: pointer;
   box-sizing: border-box;
   font-size: 1em;
   &:hover, &.loading {
-    color: @color-gray2;
-    background-color: @color-white2;
+    color: @color-black2;
+    background-color: @color-white4;
+  }
+  &:visited, &:active, &:link {
+    border-color: @color-white1;
+    color: @color-orange2;
   }
 }
 .dashed {
@@ -30,23 +34,26 @@
 .link {
   color: @color-blue1;
   &:hover, &.loading {
-    color: @color-blue2;
+    color: @color-blue3;
   }
 }
 .primary {
   background: @color-blue1;
   border-color: @color-blue1;
-  color: @color-white1;
+  color: @color-white5;
   &:hover, &.loading {
-    color: @color-white2;
-    background-color: @color-blue2;
+    background-color: @color-blue3;
+    color: @color-white3
+  }
+  &:visited {
+    border-color: @color-blue1;
   }
 }
 
 .disabled {
-  background: @color-white2;
-  color: @color-gray1;
-  border-color: @color-gray1;
+  background: @color-black3;
+  color: @color-white1;
+  border-color: @color-black3;
   cursor: not-allowed;
 }
 

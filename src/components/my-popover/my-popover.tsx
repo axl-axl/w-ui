@@ -10,22 +10,22 @@ export class MyPopover {
   @Prop() position?: 't' | 'b' | 'l' | 'r' | 'tl' | 'tr' | 'bl' | 'br' = 't';
   @Prop() visible?: boolean = false;
   @State() status: boolean = false;
-/**
- * 监听组件上click事件，来修改当前状态
-*/
+  /**
+   * 监听组件上click事件，来修改当前状态
+  */
   @Listen('click')
   clickHandler(e) {
     if (this.target !== 'click') return
     this.status = !this.status;
     e.stopPropagation()
   }
-/**
- * 监听html上的click事件，来关闭popover
- */
+  /**
+   * 监听html上的click事件，来关闭popover
+   */
   @Listen('click', {
     target: 'document'
   })
-  clickBodyHandler(e) {
+  clickBodyHandler() {
     this.status = false
   }
   /**
